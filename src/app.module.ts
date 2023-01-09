@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
+    UsersModule,
   ],
   controllers: [],
   providers: [],
