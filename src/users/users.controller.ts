@@ -8,6 +8,7 @@ import {
   Body,
 } from '@nestjs/common';
 import { SignUpDto } from './dto/sign-up.dto';
+import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -15,17 +16,17 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  signUp(@Body() signUpData: SignUpDto) {
+  signUp(@Body() signUpData: SignUpDto): Promise<void> {
     return this.usersService.signUp(signUpData);
   }
 
   @Get()
-  getAll() {
+  getAll(): Promise<User[]> {
     return this.usersService.getAll();
   }
 
   @Get('/:id')
-  getOne(@Param('id') uid: number) {
+  getOne(@Param('id') uid: number): Promise<User> {
     return this.usersService.getOne(uid);
   }
 
@@ -35,7 +36,7 @@ export class UsersController {
   }
 
   @Delete('/:id')
-  delete(@Param('id') uid: number) {
+  delete(@Param('id') uid: number): Promise<void> {
     return this.usersService.delete(uid);
   }
 
