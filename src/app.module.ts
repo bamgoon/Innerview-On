@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -13,7 +14,7 @@ import { UsersModule } from './users/users.module';
       password: '0000',
       database: 'INNERVIEWON',
       schema: 'INNERVIEWON',
-      entities: [],
+      entities: [User],
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
