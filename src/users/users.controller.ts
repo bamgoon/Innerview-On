@@ -7,6 +7,7 @@ import {
   Delete,
   Body,
 } from '@nestjs/common';
+import { SignUpDto } from './dto/sign-up.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -14,7 +15,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  signUp(@Body() signUpData) {
+  signUp(@Body() signUpData: SignUpDto) {
     return this.usersService.signUp(signUpData);
   }
 

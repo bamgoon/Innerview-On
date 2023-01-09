@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { SignUpDto } from './dto/sign-up.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  async signUp(signUpData): Promise<void> {
+  async signUp(signUpData: SignUpDto): Promise<void> {
     const { account, password, name, email, phoneNumber, role } = signUpData;
     const user = new User();
     user.account = account;
