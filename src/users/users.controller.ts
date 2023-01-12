@@ -7,8 +7,10 @@ import {
   Delete,
   Body,
 } from '@nestjs/common';
+import { UpdateResult } from 'typeorm';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -32,7 +34,10 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  update(@Param('id') uid: number, @Body() updateData) {
+  update(
+    @Param('id') uid: number,
+    @Body() updateData: UpdateUserDto,
+  ): Promise<UpdateResult> {
     return this.usersService.update(uid, updateData);
   }
 

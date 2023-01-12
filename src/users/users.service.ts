@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
+import { UpdateResult } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -37,8 +39,8 @@ export class UsersService {
   async getOne(id: number): Promise<User> {
     return User.findOneBy({ id });
   }
-  update(id: number, updateData) {
-    return `${updateData}로 특정 유저 수정`;
+  async update(id: number, updateData: UpdateUserDto): Promise<UpdateResult> {
+    return User.update({ id }, updateData);
   }
   async delete(id: number): Promise<void> {
     await User.delete({ id });
