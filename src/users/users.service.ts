@@ -6,6 +6,10 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UpdateResult } from 'typeorm';
 
+const verifyPassword = async (password: string, hashedPassword: string) => {
+  return await bcrypt.compare(password, hashedPassword);
+};
+
 @Injectable()
 export class UsersService {
   async signUp(signUpData: SignUpDto): Promise<void> {
@@ -27,7 +31,7 @@ export class UsersService {
     const { account, password } = signInData;
     const user = await User.findOneBy({ account });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
+    if (await verifyPassword(password, user.password)) {
       return user;
     } else {
       return new User();
