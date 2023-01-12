@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { User } from './entities/user.entity';
 
@@ -15,8 +16,10 @@ export class UsersService {
     user.role = role;
     await user.save();
   }
-  signIn(signInData) {
-    return `${signInData}로 로그인 진행`;
+  async signIn(signInData: SignInDto) {
+    const { account, password } = signInData;
+    const user = await User.findOneBy({ account });
+    return user;
   }
   async getAll(): Promise<User[]> {
     return User.find();

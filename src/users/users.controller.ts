@@ -7,6 +7,7 @@ import {
   Delete,
   Body,
 } from '@nestjs/common';
+import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
@@ -41,7 +42,7 @@ export class UsersController {
   }
 
   @Post('/signin')
-  signIn(@Body() signInData) {
+  signIn(@Body() signInData: SignInDto): Promise<User> {
     return this.usersService.signIn(signInData);
   }
 }
