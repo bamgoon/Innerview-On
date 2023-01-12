@@ -2,14 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   async signUp(signUpData: SignUpDto): Promise<void> {
     const { account, password, name, email, phoneNumber, role } = signUpData;
+
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const user = new User();
     user.account = account;
-    user.password = password;
+    user.password = hashedPassword;
     user.name = name;
     user.email = email;
     user.phoneNumber = phoneNumber;
@@ -19,7 +24,12 @@ export class UsersService {
   async signIn(signInData: SignInDto) {
     const { account, password } = signInData;
     const user = await User.findOneBy({ account });
-    return user;
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return user;
+    } else {
+      return new User();
+    }
   }
   async getAll(): Promise<User[]> {
     return User.find();
