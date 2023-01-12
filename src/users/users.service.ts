@@ -5,6 +5,14 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UpdateResult } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { UserRoleType } from './UserRoleType';
+
+export interface Payload {
+  id: number;
+  name: string;
+  role: UserRoleType;
+}
 
 const verifyPassword = async (password: string, hashedPassword: string) => {
   return await bcrypt.compare(password, hashedPassword);
@@ -12,6 +20,8 @@ const verifyPassword = async (password: string, hashedPassword: string) => {
 
 @Injectable()
 export class UsersService {
+  constructor(private jwtService: JwtService) {}
+
   async signUp(signUpData: SignUpDto): Promise<void> {
     const { account, password, name, email, phoneNumber, role } = signUpData;
 
@@ -32,6 +42,14 @@ export class UsersService {
     const user = await User.findOneBy({ account });
 
     if (await verifyPassword(password, user.password)) {
+      const payload: Payload = {
+        id: user.id,
+        name: user.name,
+        role: user.role,
+      };
+
+      const accessToken = this.jwtService.sign(payload);
+
       return user;
     } else {
       return new User();
