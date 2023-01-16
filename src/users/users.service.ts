@@ -6,13 +6,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UpdateResult } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { UserRoleType } from './UserRoleType';
-
-export interface Payload {
-  id: number;
-  name: string;
-  role: UserRoleType;
-}
+import { Payload } from './security/payload.interface';
 
 const verifyPassword = async (password: string, hashedPassword: string) => {
   return await bcrypt.compare(password, hashedPassword);
