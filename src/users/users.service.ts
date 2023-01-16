@@ -1,12 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { SignInDto } from './dto/sign-in.dto';
-import { SignUpDto } from './dto/sign-up.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UpdateResult } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Payload } from './security/payload.interface';
+import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 
 const verifyPassword = async (password: string, hashedPassword: string) => {
   return await bcrypt.compare(password, hashedPassword);

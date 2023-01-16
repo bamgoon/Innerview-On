@@ -9,9 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UpdateResult } from 'typeorm';
-import { SignInDto } from './dto/sign-in.dto';
-import { SignUpDto } from './dto/sign-up.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { JwtAuthGuard } from './security/auth.guard';
 import { UsersService } from './users.service';
