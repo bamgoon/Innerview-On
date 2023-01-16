@@ -5,6 +5,7 @@ import * as Joi from 'joi';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { RoomsModule } from './rooms/rooms.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { UsersModule } from './users/users.module';
       namingStrategy: new SnakeNamingStrategy(),
     }),
     UsersModule,
+    RoomsModule,
   ],
   controllers: [],
   providers: [],
