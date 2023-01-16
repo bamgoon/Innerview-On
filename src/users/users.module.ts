@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './security/passport.jwt.strategy';
 
 @Module({
   imports: [
@@ -9,8 +11,9 @@ import { JwtModule } from '@nestjs/jwt';
       secret: 'SECRET',
       signOptions: { expiresIn: '300s' },
     }),
+    PassportModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, JwtStrategy],
 })
 export class UsersModule {}

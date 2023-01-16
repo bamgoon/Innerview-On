@@ -35,7 +35,7 @@ export class UsersService {
     const { account, password } = signInData;
     const user = await User.findOneBy({ account });
 
-    if (await verifyPassword(password, user.password)) {
+    if (user && (await verifyPassword(password, user.password))) {
       const payload: Payload = {
         id: user.id,
         name: user.name,
@@ -57,5 +57,8 @@ export class UsersService {
   }
   async delete(id: number): Promise<void> {
     await User.delete({ id });
+  }
+  async tokenValidateUser(payload: Payload): Promise<User> {
+    return await User.findOneBy({ id: payload.id, name: payload.name });
   }
 }
