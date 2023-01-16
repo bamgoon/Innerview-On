@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -47,12 +47,9 @@ export class UsersService {
         name: user.name,
         role: user.role,
       };
-
-      const accessToken = this.jwtService.sign(payload);
-
-      return user;
+      return { accessToken: this.jwtService.sign(payload) };
     } else {
-      return new User();
+      throw new UnauthorizedException();
     }
   }
   async getAll(): Promise<User[]> {
