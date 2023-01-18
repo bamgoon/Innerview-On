@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Room } from './entities/room.entity';
 import { User } from 'src/users/entities/user.entity';
 import { CreateRoomDto } from './dto';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class RoomsService {
@@ -12,6 +13,7 @@ export class RoomsService {
     room.subTitle = subTitle;
     room.openDate = openDate;
     room.closeDate = closeDate;
+    room.entryCode = uuidv4();
     room.users = [];
     for (const id of uids) room.users.push(await User.findOneBy({ id }));
 

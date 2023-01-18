@@ -28,6 +28,9 @@ export class Room extends BaseEntity {
   @Column()
   closeDate: Date;
 
+  @Column()
+  entryCode: String;
+
   @CreateDateColumn()
   createdAt: Date;
 
