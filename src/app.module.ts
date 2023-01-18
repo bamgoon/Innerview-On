@@ -6,6 +6,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { RoomsModule } from './rooms/rooms.module';
+import { Room } from './rooms/entities/room.entity';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { RoomsModule } from './rooms/rooms.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       schema: process.env.DB_SCHEMA,
-      entities: [User],
+      entities: [User, Room],
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
