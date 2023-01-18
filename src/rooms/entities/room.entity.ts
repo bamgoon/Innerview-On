@@ -23,10 +23,10 @@ export class Room extends BaseEntity {
   subTitle: string;
 
   @Column()
-  openDate: string;
+  openDate: Date;
 
   @Column()
-  closeDate: string;
+  closeDate: Date;
 
   @CreateDateColumn()
   createdAt: Date;

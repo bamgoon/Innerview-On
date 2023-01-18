@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Room } from './entities/room.entity';
 import { User } from 'src/users/entities/user.entity';
+import { CreateRoomDto } from './dto';
 
 @Injectable()
 export class RoomsService {
-  async create(createRoomDto) {
+  async create(createRoomDto: CreateRoomDto) {
     const { mainTitle, subTitle, openDate, closeDate, uids } = createRoomDto;
     const room = new Room();
     room.mainTitle = mainTitle;
