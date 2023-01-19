@@ -23,6 +23,7 @@ export class RoomsService {
     return await Room.createQueryBuilder('room')
       .leftJoin('room.users', 'user')
       .select([
+        'room.id',
         'room.mainTitle',
         'room.subTitle',
         'user.name',
@@ -37,6 +38,7 @@ export class RoomsService {
       .where('room.id = :id', { id })
       .leftJoin('room.users', 'user')
       .select([
+        'room.id',
         'room.mainTitle',
         'room.subTitle',
         'user.name',
