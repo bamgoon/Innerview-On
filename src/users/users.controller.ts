@@ -11,7 +11,7 @@ import {
 import { UpdateResult } from 'typeorm';
 import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 import { User } from './entities/user.entity';
-import { JwtAuthGuard } from '../common/guards/auth.guard';
+import { JwtGuard } from '../common/guards/jwt.guard';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -23,19 +23,19 @@ export class UsersController {
     return this.usersService.signUp(signUpData);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtGuard)
   @Get()
   getAll(): Promise<User[]> {
     return this.usersService.getAll();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtGuard)
   @Get('/:id')
   getOne(@Param('id') uid: number): Promise<User> {
     return this.usersService.getOne(uid);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtGuard)
   @Patch('/:id')
   update(
     @Param('id') uid: number,
@@ -44,7 +44,7 @@ export class UsersController {
     return this.usersService.update(uid, updateData);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtGuard)
   @Delete('/:id')
   delete(@Param('id') uid: number): Promise<void> {
     return this.usersService.delete(uid);
