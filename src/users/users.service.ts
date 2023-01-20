@@ -3,7 +3,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UpdateResult } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { Payload } from './security/payload.interface';
+import { Payload } from '../common/interfaces/payload.interface';
 import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 
 const verifyPassword = async (password: string, hashedPassword: string) => {

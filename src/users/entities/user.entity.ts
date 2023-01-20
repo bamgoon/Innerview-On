@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { UserRoleType } from '../UserRoleType';
+import { Role } from '../../common/enums/Role';
 
 @Entity()
 export class User extends BaseEntity {
@@ -29,8 +29,8 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   phoneNumber: string;
 
-  @Column({ type: 'enum', enum: UserRoleType })
-  role: UserRoleType;
+  @Column({ type: 'enum', enum: Role })
+  role: Role;
 
   @CreateDateColumn()
   createdAt: Date;

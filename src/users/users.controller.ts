@@ -11,7 +11,7 @@ import {
 import { UpdateResult } from 'typeorm';
 import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 import { User } from './entities/user.entity';
-import { JwtAuthGuard } from './security/auth.guard';
+import { JwtAuthGuard } from '../common/guards/auth.guard';
 import { UsersService } from './users.service';
 
 @Controller('users')

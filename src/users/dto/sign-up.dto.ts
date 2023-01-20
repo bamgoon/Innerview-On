@@ -5,7 +5,7 @@ import {
   IsString,
   Matches,
 } from 'class-validator';
-import { UserRoleType } from '../UserRoleType';
+import { Role } from '../../common/enums/Role';
 
 export class SignUpDto {
   @IsString()
@@ -33,5 +33,5 @@ export class SignUpDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly role: UserRoleType;
+  readonly role: Role;
 }
