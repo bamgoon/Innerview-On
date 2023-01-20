@@ -13,6 +13,9 @@ import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { JwtGuard } from '../common/guards/jwt.guard';
 import { UsersService } from './users.service';
+import { RoleGuard } from 'src/common/guards/role.guard';
+import { Roles } from 'src/common/decorators/role.decorator';
+import { Role } from 'src/common/enums/Role';
 
 @Controller('users')
 export class UsersController {
@@ -23,13 +26,15 @@ export class UsersController {
     return this.usersService.signUp(signUpData);
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
+  @Roles(Role.MANAGER)
   @Get()
   getAll(): Promise<User[]> {
     return this.usersService.getAll();
   }
 
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
+  @Roles(Role.MANAGER)
   @Get('/:id')
   getOne(@Param('id') uid: number): Promise<User> {
     return this.usersService.getOne(uid);
