@@ -7,6 +7,7 @@ import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { Room } from './rooms/entities/room.entity';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { Room } from './rooms/entities/room.entity';
     }),
     UsersModule,
     RoomsModule,
+    EventsModule,
   ],
   controllers: [],
   providers: [],
