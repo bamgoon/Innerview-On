@@ -15,10 +15,10 @@ export class WsGuard implements CanActivate {
   canActivate(context: ExecutionContext) {
     const roles = this.reflector.get<Role[]>('ROLES_KEY', context.getHandler());
     const socket: Socket = context.getArgByIndex(0);
-    const bearerToken = socket.handshake.headers.authorization.split(' ')[1];
+    const accessToken = socket.handshake.headers.authorization;
     try {
       const decoded = this.jwtService.verify(
-        bearerToken,
+        accessToken,
         this.configService.get('JWT_ACCESS_TOKEN'),
       );
       return roles.includes(decoded.role);
