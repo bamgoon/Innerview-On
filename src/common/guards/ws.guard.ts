@@ -17,10 +17,7 @@ export class WsGuard implements CanActivate {
     const socket: Socket = context.getArgByIndex(0);
     const accessToken = socket.handshake.headers.authorization;
     try {
-      const decoded = this.jwtService.verify(
-        accessToken,
-        this.configService.get('JWT_ACCESS_TOKEN'),
-      );
+      const decoded = this.jwtService.verify(accessToken, this.configService.get('JWT_ACCESS_TOKEN'));
       return roles.includes(decoded.role);
     } catch (e) {
       console.log(e);

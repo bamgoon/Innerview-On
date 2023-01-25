@@ -1,10 +1,4 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsPhoneNumber,
-  IsString,
-  Matches,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString, Matches } from 'class-validator';
 import { Role } from '../../common/enums/Role';
 
 export class SignUpDto {

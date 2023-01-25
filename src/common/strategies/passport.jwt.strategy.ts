@@ -8,10 +8,7 @@ import { Payload } from '../interfaces/payload.interface';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(
-    private usersService: UsersService,
-    private readonly configService: ConfigService,
-  ) {
+  constructor(private usersService: UsersService, private readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -22,10 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: Payload, done: VerifiedCallback): Promise<any> {
     const user = await this.usersService.tokenValidateUser(payload);
     if (!user) {
-      return done(
-        new UnauthorizedException({ message: 'user dose not exist' }),
-        false,
-      );
+      return done(new UnauthorizedException({ message: 'user dose not exist' }), false);
     }
     return done(null, user);
   }

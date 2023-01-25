@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Param,
-  Get,
-  Patch,
-  Post,
-  Delete,
-  Body,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Param, Get, Patch, Post, Delete, Body, UseGuards } from '@nestjs/common';
 import { UpdateResult } from 'typeorm';
 import { SignInDto, SignUpDto, UpdateUserDto } from './dto';
 import { User } from './entities/user.entity';
@@ -42,10 +33,7 @@ export class UsersController {
 
   @UseGuards(JwtGuard)
   @Patch('/:id')
-  update(
-    @Param('id') uid: number,
-    @Body() updateData: UpdateUserDto,
-  ): Promise<UpdateResult> {
+  update(@Param('id') uid: number, @Body() updateData: UpdateUserDto): Promise<UpdateResult> {
     return this.usersService.update(uid, updateData);
   }
 
