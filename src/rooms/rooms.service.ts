@@ -54,7 +54,20 @@ export class RoomsService {
   async delete(id: number) {
     return await Room.delete({ id });
   }
-  enter(id: number) {
-    return `${id} 방 입장`;
+  async enter(id: number) {
+    return await Room.createQueryBuilder('room')
+      .where('room.id = :id', { id })
+      .leftJoin('room.users', 'user')
+      .select([
+        'room.id',
+        'room.mainTitle',
+        'room.subTitle',
+        'room.entryCode',
+        'user.name',
+        'user.role',
+        'user.email',
+        'user.phoneNumber',
+      ])
+      .getOne();
   }
 }
