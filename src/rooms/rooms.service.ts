@@ -63,6 +63,7 @@ export class RoomsService {
         'room.mainTitle',
         'room.subTitle',
         'room.entryCode',
+        'user.id',
         'user.name',
         'user.role',
         'user.email',
